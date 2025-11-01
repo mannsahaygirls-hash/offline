@@ -14,10 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the working directory
 COPY main.py .
 
-# Make port 8000 available to the world outside this container
-EXPOSE 8000
-
-# Run the application using Uvicorn with gunicorn workers (for production stability)
-# The command starts your application when the container launches.
-# We bind it to 0.0.0.0 so it is accessible outside the container.
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENV PORT 8080
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "${PORT}"]
