@@ -228,7 +228,7 @@ async def check_ollama_status():
         return {"status": "offline"}
 
 # --- 6. Run the FastAPI server ---
-if __name__ == "__main__":
-    print("Starting FastAPI server for MannSahay & MannMitra...")
-    print("Access the API docs at http://localhost:8000/docs")
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+# if __name__ == "__main__":
+#     print("Starting FastAPI server for MannSahay & MannMitra...")
+#     print("Access the API docs at http://localhost:8000/docs")
+#     uvicorn.run(app, host="127.0.0.1", port=8000)
