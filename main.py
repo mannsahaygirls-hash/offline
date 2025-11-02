@@ -107,7 +107,8 @@ How: Do it gently and as a last resort. Do not suggest them often.
 
 # --- 2. Set up FastAPI and shared HTTP client ---
 app = FastAPI()
-client = httpx.AsyncClient(base_url="http://localhost:11434", timeout=30.0)
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://34.131.19.231:11434")
+client = httpx.AsyncClient(base_url=OLLAMA_URL, timeout=30.0)
 
 
 # --- 3. Define the shared data models ---
