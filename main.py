@@ -106,14 +106,21 @@ How: Do it gently and as a last resort. Do not suggest them often.
 
 
 # --- 2. Set up FastAPI and shared HTTP client ---
+import os # Make sure this is added if it's missing!
+# ... (rest of your code)
+
+# --- 2. Set up FastAPI and shared HTTP client ---
 app = FastAPI()
-import os
 
-# Read OLLAMA_HOST environment variable, defaulting to localhost for local testing
-OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+# This uses the OLLAMA_HOST environment variable you set in Cloud Run.
+# It defaults to localhost for local testing.
+OLLAMA_BASE_URL = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 
-# IMPORTANT: Increase timeout to 60 seconds for slow CPU-only inference
-client = httpx.AsyncClient(base_url=OLLAMA_HOST, timeout=60.0)
+# IMPORTANT: Increase the timeout to 120 seconds (2 minutes)
+# to give the slower CPU-only Ollama VM time to generate a response.
+client = httpx.AsyncClient(base_url=OLLAMA_BASE_URL, timeout=120.0) 
+
+# ... (rest of the file)
 
 
 # --- 3. Define the shared data models ---
