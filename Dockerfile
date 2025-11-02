@@ -14,6 +14,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the working directory
 COPY main.py .
-
 ENV PORT 8080
-CMD uvicorn main:app --host 0.0.0.0 --port $PORT
+
+# --- PRODUCTION-GRADE STARTUP COMMAND ---
+# Use Gunicorn as the process manager with Uvicorn workers.
+# This avoids the fragile pure Uvicorn setup and correctly uses the $PORT.
+CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker main:app
